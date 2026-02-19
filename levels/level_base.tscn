@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://dmsg1hojs7p04"]
+
+[ext_resource type="Script" path="res://levels/level_base.gd" id="1_auj53"]
+[ext_resource type="TileSet" uid="uid://dtt63jpyf8ntu" path="res://levels/World.tres" id="2_1rjdy"]
+[ext_resource type="Texture2D" uid="uid://bcbjj7bq042ab" path="res://assets/environment/backNew.png" id="2_12ipu"]
+[ext_resource type="Texture2D" uid="uid://duyo8mv3pxq73" path="res://assets/environment/backNewNight.png" id="3_bma75"]
+[ext_resource type="TileSet" uid="uid://bpsd617emqp84" path="res://assets/environment/tiles_items.tres" id="3_guxsm"]
+[ext_resource type="Texture2D" uid="uid://d1wmyyeofn7n1" path="res://assets/environment/middle.png" id="3_u7834"]
+[ext_resource type="TileSet" uid="uid://blhd0ogpuydej" path="res://assets/environment/tiles_spikes.tres" id="5_gndbs"]
+[ext_resource type="PackedScene" uid="uid://cr1x5twwh7p5y" path="res://items/item.tscn" id="6_7htgl"]
+[ext_resource type="PackedScene" uid="uid://b1eawtcyse15i" path="res://player/player.tscn" id="7_6k7a8"]
+[ext_resource type="PackedScene" uid="uid://ciwvj260nkc3r" path="res://ui/hud.tscn" id="9_eyoyd"]
+[ext_resource type="AudioStream" uid="uid://dmdury4amb0mr" path="res://assets/sounds/gameplay_music.wav" id="10_g2xwn"]
+[ext_resource type="AudioStream" uid="uid://ca6s65gkw7rx1" path="res://assets/sounds/rune_pickup.wav" id="11_5j3sg"]
+
+[node name="LevelBase" type="Node2D"]
+script = ExtResource("1_auj53")
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.2, 1)
+motion_mirroring = Vector2(576, 0)
+
+[node name="Day" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer"]
+position = Vector2(-755, -608)
+scale = Vector2(4, 4)
+texture = ExtResource("2_12ipu")
+centered = false
+
+[node name="Night" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer"]
+position = Vector2(-755, -608)
+scale = Vector2(4, 4)
+texture = ExtResource("3_bma75")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground2"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer2"]
+texture_repeat = 3
+position = Vector2(299, 134)
+scale = Vector2(2.114, 1.5)
+texture = ExtResource("3_u7834")
+region_enabled = true
+region_rect = Rect2(0, 0, 1000, 368)
+
+[node name="World" type="TileMap" parent="." groups=["environment"]]
+tile_set = ExtResource("2_1rjdy")
+format = 2
+layer_0/tile_data = PackedInt32Array(65536, 1114112, 14, 65537, 1114112, 14, 65538, 1114112, 14, 65539, 1114112, 14, 65540, 1114112, 14, 65541, 1114112, 14, 65542, 1114112, 14, 65543, 1114112, 14, 131071, 1114112, 14, 131070, 1114112, 14, 131069, 1114112, 14, 131068, 1114112, 14, 131067, 1114112, 14, 65544, 196608, 1, 65529, 262144, 18, 131065, 262144, 18, 65530, 327680, 18, 131066, 327680, 18, -65543, 262144, 16, -7, 262144, 17, -6, 327680, 17, -131079, 262144, 16, -196615, 262144, 16, -262151, 262144, 16, -327687, 262144, 16, -393223, 262144, 16, -458759, 262144, 16, -524295, 262144, 16, -589831, 262144, 16, -655367, 262144, 16, -720903, 327680, 1, -720907, 65536, 1, -720905, 196608, 1, -720912, 65536, 1, -720910, 196608, 1, -720908, 65536, 1, -720917, 65536, 1, -720915, 196608, 1, -720913, 65536, 1, -720922, 65536, 1, -720920, 196608, 1, -720918, 65536, 1, -720927, 65536, 1, -720925, 196608, 1, -720923, 65536, 1, -720906, 196608, 1, -720904, 327680, 1, -720911, 196608, 1, -720909, 327680, 1, -720916, 196608, 1, -720914, 327680, 1, -720921, 196608, 1, -720919, 327680, 1, -720928, 65536, 1, -720926, 196608, 1, -720924, 327680, 1, 65545, 65536, 1, 65547, 196608, 1, 65549, 327680, 1, 65550, 327680, 1, 65552, 196608, 1, 65554, 327680, 1, 65555, 327680, 1, 65557, 196608, 1, 65559, 327680, 1, 65546, 65536, 1, 65548, 196608, 1, 65551, 65536, 1, 65553, 196608, 1, 65556, 65536, 1, 65558, 196608, 1, 65560, 327680, 1, 25, 1245184, 1, 65561, 1245184, 2, 26, 1310720, 1, 65562, 1310720, 2, -65509, 1245184, 1, 27, 1245184, 2, -65508, 1310720, 1, 28, 1310720, 2, -131043, 1245184, 1, -65507, 1245184, 2, -131042, 1310720, 1, -65506, 1310720, 2)
+
+[node name="Items" type="TileMap" parent="."]
+tile_set = ExtResource("3_guxsm")
+format = 2
+
+[node name="Danger" type="TileMap" parent="." groups=["danger"]]
+tile_set = ExtResource("5_gndbs")
+format = 2
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+
+[node name="Item" parent="." instance=ExtResource("6_7htgl")]
+
+[node name="Item2" parent="." instance=ExtResource("6_7htgl")]
+
+[node name="Item3" parent="." instance=ExtResource("6_7htgl")]
+
+[node name="Player" parent="." instance=ExtResource("7_6k7a8")]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("10_g2xwn")
+autoplay = true
+
+[node name="PickedUp" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("11_5j3sg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("9_eyoyd")]
+
+[node name="Day" type="Timer" parent="."]
+one_shot = true
+
+[node name="Night" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="score_changed" from="." to="CanvasLayer/HUD" method="update_runes"]
+[connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="life_changed" from="Player" to="CanvasLayer/HUD" method="update_life"]
+[connection signal="timeout" from="Day" to="." method="_on_day_timeout"]
+[connection signal="timeout" from="Night" to="." method="_on_night_timeout"]
