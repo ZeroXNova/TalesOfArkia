@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbch6xi57yafi"]
+
+[ext_resource type="Gradient" uid="uid://601s8pc76kio" path="res://player/magic/gradient1.tres" id="1_p06nj"]
+[ext_resource type="Texture2D" uid="uid://d2g60udpjtxo6" path="res://player/magic/circletexturexcf.png" id="2_lsmsw"]
+[ext_resource type="Gradient" uid="uid://cy6mxvkvy5s4y" path="res://player/magic/gradient2.tres" id="3_i5vt5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_efn1j"]
+
+[sub_resource type="Curve" id="Curve_cyigf"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 360), 0.0, 0.0, 0, 0, Vector2(2e-05, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_2wc3u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Main" type="Node"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_efn1j")
+
+[node name="Circles" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(578, 362)
+rotation = -1.5708
+scale = Vector2(0.075, 0.075)
+amount = 75
+lifetime = 0.1
+speed_scale = 0.25
+local_coords = true
+texture = ExtResource("2_lsmsw")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+direction = Vector2(100, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+angular_velocity_min = 720.0
+angular_velocity_max = 720.0
+angular_velocity_curve = SubResource("Curve_cyigf")
+angle_min = -702.9
+angle_max = 720.0
+scale_amount_max = 4.8
+scale_amount_curve = SubResource("Curve_2wc3u")
+color_ramp = ExtResource("3_i5vt5")
+
+[node name="Squares" type="CPUParticles2D" parent="Circles"]
+show_behind_parent = true
+scale = Vector2(66.6667, 66.6667)
+amount = 10000
+lifetime = 0.09
+speed_scale = 0.2
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(50, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 97.22
+angle_min = -702.9
+angle_max = -702.9
+scale_amount_max = 2.5
+scale_amount_curve = SubResource("Curve_2wc3u")
+color_ramp = ExtResource("1_p06nj")

@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://b1eawtcyse15i"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_psfuf"]
+[ext_resource type="Texture2D" uid="uid://3hcsmk62iqq5" path="res://assets/PlayerIdle1.png" id="2_2akf5"]
+[ext_resource type="PackedScene" uid="uid://d2ju60tdqvxkv" path="res://player/magic.tscn" id="2_ahg32"]
+[ext_resource type="AudioStream" uid="uid://dy0df41nipag3" path="res://assets/sounds/hurt1.ogg" id="3_77c7l"]
+[ext_resource type="AudioStream" uid="uid://bs5djcbsxq30u" path="res://assets/sounds/magic_sound.wav" id="5_1822r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhfbl"]
+size = Vector2(17, 26)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_psfuf")
+magic_scene = ExtResource("2_ahg32")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2akf5")
+
+[node name="Staff" type="Marker2D" parent="Sprite2D"]
+position = Vector2(11, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 3)
+shape = SubResource("RectangleShape2D_yhfbl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_77c7l")
+volume_db = -5.0
+
+[node name="MagicCooldown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="MagicSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1822r")
+volume_db = -2.811
+
+[connection signal="timeout" from="MagicCooldown" to="." method="_on_magic_cooldown_timeout"]
